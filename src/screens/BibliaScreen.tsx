@@ -58,7 +58,7 @@ export default function BibliaScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 24, backgroundColor: '#fff', paddingBottom: 80 },
   title: { fontSize: 24, fontWeight: 'bold', color: '#1B4F8A' },
   busca: { borderWidth: 1, borderColor: '#C9DEF4', borderRadius: 8, padding: 12, fontSize: 15, marginBottom: 16 },
   secao: { fontSize: 13, fontWeight: 'bold', color: '#3A7FC1', marginTop: 16, marginBottom: 8, textTransform: 'uppercase' },

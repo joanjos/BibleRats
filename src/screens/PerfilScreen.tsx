@@ -187,7 +187,7 @@ export default function PerfilScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 24, backgroundColor: '#fff', flexGrow: 1 },
+  container: { padding: 24, backgroundColor: '#fff', flexGrow: 1, paddingBottom: 80 },
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   title: { fontSize: 24, fontWeight: 'bold', marginTop: 48, marginBottom: 24, color: '#1B4F8A' },
   avatar: { width: 80, height: 80, borderRadius: 40, backgroundColor: '#1B4F8A', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginBottom: 12 },

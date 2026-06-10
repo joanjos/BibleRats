@@ -91,7 +91,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  content: { padding: 24, paddingBottom: 40 },
+  content: { padding: 24, paddingBottom: 80, flexGrow: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 48, marginBottom: 24 },
   saudacao: { fontSize: 22, fontWeight: 'bold', color: '#1B4F8A' },
   sair: { color: '#e63946', fontSize: 15 },

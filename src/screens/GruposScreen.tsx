@@ -102,9 +102,6 @@ export default function GruposScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.voltar}>← Voltar</Text>
-        </TouchableOpacity>
         <View style={styles.tituloContainer}>
           <Image source={require('../../assets/group.png')} style={styles.tituloIcone} />
           <Text style={styles.title}>Meus Grupos</Text>
@@ -246,7 +243,7 @@ export default function GruposScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 24, backgroundColor: '#fff', paddingBottom: 80 },
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 48, marginBottom: 24 },
   title: { fontSize: 24, fontWeight: 'bold', color: '#1B4F8A' },

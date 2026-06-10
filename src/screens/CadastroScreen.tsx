@@ -108,7 +108,7 @@ export default function CadastroScreen({ navigation }: any) {
       <Text style={styles.label}>Nome completo *</Text>
       <TextInput
         style={styles.input}
-        placeholder="Ex: João Silva"
+        placeholder="Ex: João Melone"
         value={nomeCompleto}
         onChangeText={setNomeCompleto}
       />
@@ -116,7 +116,7 @@ export default function CadastroScreen({ navigation }: any) {
       <Text style={styles.label}>Nome de usuário *</Text>
       <TextInput
         style={styles.input}
-        placeholder="Ex: joaosilva"
+        placeholder="Ex: joaomelone"
         value={nomeUsuario}
         onChangeText={setNomeUsuario}
         autoCapitalize="none"
@@ -135,7 +135,7 @@ export default function CadastroScreen({ navigation }: any) {
       <Text style={styles.label}>Senha *</Text>
       <TextInput
         style={styles.input}
-        placeholder="Mínimo 6 caracteres"
+        placeholder="Mínimo de 6 caracteres"
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
@@ -178,7 +178,7 @@ export default function CadastroScreen({ navigation }: any) {
       <Text style={styles.label}>Igreja / Comunidade</Text>
       <TextInput
         style={styles.input}
-        placeholder="Ex: Igreja Batista Central"
+        placeholder="Ex: Igreja Cristã Casa Favorita"
         value={igreja}
         onChangeText={setIgreja}
       />
