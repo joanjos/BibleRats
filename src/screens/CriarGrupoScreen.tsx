@@ -4,9 +4,9 @@ import { supabase } from '../services/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
 const TIPOS_PLANO = [
-  { valor: 'sequencial', label: '📖 Sequencial (Gênesis ao Apocalipse)' },
-  { valor: 'anual', label: '📅 Plano anual (Bíblia em 1 ano)' },
-  { valor: 'personalizado', label: '✏️ O grupo escolhe a passagem' },
+  { valor: 'sequencial', label: 'Sequencial (Gênesis ao Apocalipse)' },
+  { valor: 'anual', label: 'Plano anual (Bíblia em 1 ano)' },
+  { valor: 'personalizado', label: 'O grupo escolhe a passagem' },
 ];
 
 const CAPITULOS_POR_DIA = [1, 2, 3, 4, 5];
@@ -20,8 +20,8 @@ const DURACOES = [
 ];
 
 const TIPOS_CHECKIN = [
-  { valor: 'diario', label: '📅 Dias ativos', descricao: 'O usuário pode fazer apenas um check-in por dia' },
-  { valor: 'por_capitulo', label: '📖 Contagem de check-ins', descricao: 'O usuário pode fazer check-in para cada capítulo lido' },
+  { valor: 'diario', label: 'Dias ativos', descricao: 'O usuário pode fazer apenas um check-in por dia' },
+  { valor: 'por_capitulo', label: 'Contagem de check-ins', descricao: 'O usuário pode fazer check-in para cada capítulo lido' },
 ];
 
 export default function CriarGrupoScreen({ navigation }: any) {
@@ -140,10 +140,10 @@ export default function CriarGrupoScreen({ navigation }: any) {
         </>
       )}
 
-      <Text style={[styles.label, { marginTop: 16 }]}>✅ Regra de check-in</Text>
+      <Text style={[styles.label, { marginTop: 16 }]}>Regra de check-in</Text>
       {tipoPlano === 'anual' ? (
         <View style={styles.duracaoTravada}>
-          <Text style={styles.duracaoTravadaTexto}>📅 Fixado em 1 check-in por dia (plano anual)</Text>
+          <Text style={styles.duracaoTravadaTexto}>Fixado em 1 check-in por dia (plano anual)</Text>
         </View>
       ) : (
         TIPOS_CHECKIN.map((tipo) => (
@@ -162,10 +162,10 @@ export default function CriarGrupoScreen({ navigation }: any) {
         ))
       )}
       
-      <Text style={[styles.label, { marginTop: 16 }]}>⏱️ Duração da competição</Text>
+      <Text style={[styles.label, { marginTop: 16 }]}>Duração da competição</Text>
       {tipoPlano === 'anual' ? (
         <View style={styles.duracaoTravada}>
-          <Text style={styles.duracaoTravadaTexto}>📅 Fixado em 1 ano (plano anual)</Text>
+          <Text style={styles.duracaoTravadaTexto}>Fixado em 1 ano (plano anual)</Text>
         </View>
       ) : (
         <View style={styles.duracaoContainer}>

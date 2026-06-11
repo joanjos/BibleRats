@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useState, useEffect } from 'react';
 import { supabase } from '../services/supabase';
 import { useAuth } from '../contexts/AuthContext';
@@ -51,7 +51,10 @@ export default function HomeScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.header}>
-        <Text style={styles.saudacao}>{saudacao}{primeiroNome ? `, ${primeiroNome}` : ''}! 👋</Text>
+        <View style={styles.saudacaoContainer}>
+          <Text style={styles.saudacao}>{saudacao}{primeiroNome ? `, ${primeiroNome}` : ''}!</Text>
+          <Image source={require('../../assets/saudacao-icon.png')} style={styles.saudacaoIcone} />
+        </View>
         <TouchableOpacity onPress={handleLogout}>
           <Text style={styles.sair}>Sair</Text>
         </TouchableOpacity>
@@ -59,12 +62,12 @@ export default function HomeScreen() {
 
       <View style={styles.streakContainer}>
         <View style={styles.streakCard}>
-          <Text style={styles.streakIcone}>🔥</Text>
+          <Image source={require('../../assets/fogo-icon.png')} style={styles.streakIcone} />
           <Text style={styles.streakNumero}>{streakAtual}</Text>
           <Text style={styles.streakLabel}>dias seguidos</Text>
         </View>
         <View style={styles.streakCard}>
-          <Text style={styles.streakIcone}>🏆</Text>
+          <Image source={require('../../assets/trofeu-icon.png')} style={styles.streakIcone} />
           <Text style={styles.streakNumero}>{streakMaximo}</Text>
           <Text style={styles.streakLabel}>recorde</Text>
         </View>
@@ -94,10 +97,12 @@ const styles = StyleSheet.create({
   content: { padding: 24, paddingBottom: 80, flexGrow: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 48, marginBottom: 24 },
   saudacao: { fontSize: 22, fontWeight: 'bold', color: '#1B4F8A' },
+  saudacaoContainer: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  saudacaoIcone: { width: 50, height: 30, resizeMode: 'contain' },
   sair: { color: '#e63946', fontSize: 15 },
   streakContainer: { flexDirection: 'row', gap: 12, marginBottom: 16 },
   streakCard: { flex: 1, backgroundColor: '#EEF4FB', borderRadius: 12, padding: 16, alignItems: 'center' },
-  streakIcone: { fontSize: 28, marginBottom: 4 },
+  streakIcone: { width: 60, height: 40, marginBottom: 4, resizeMode: 'contain' },
   streakNumero: { fontSize: 28, fontWeight: 'bold', color: '#1B4F8A' },
   streakLabel: { fontSize: 12, color: '#666', marginTop: 2 },
   versiculoCard: { backgroundColor: '#1B4F8A', borderRadius: 16, padding: 24, marginBottom: 16, minHeight: 120 },

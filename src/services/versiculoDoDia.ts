@@ -1,6 +1,6 @@
 import { getCapitulo } from './bibliaApi';
 
-// Lista reduzida com IDs que funcionam na bible-api.com
+// Lista reduzida com IDs que funcionam na api
 const LIVROS_SEGUROS = [
   { id: 'genesis', nome: 'Gênesis', capitulos: 50 },
   { id: 'exodus', nome: 'Êxodo', capitulos: 40 },

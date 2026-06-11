@@ -77,9 +77,9 @@ export default function GruposScreen({ navigation }: any) {
   }
 
   function formatarPlano(tipo: string) {
-    if (tipo === 'sequencial') return '📖 Sequencial (Gênesis ao Apocalipse)';
-    if (tipo === 'anual') return '📅 Plano anual (Bíblia em 1 ano)';
-    if (tipo === 'personalizado') return '✏️ O grupo escolhe a passagem';
+    if (tipo === 'sequencial') return 'Sequencial (Gênesis ao Apocalipse)';
+    if (tipo === 'anual') return 'Plano anual (Bíblia em 1 ano)';
+    if (tipo === 'personalizado') return 'O grupo escolhe a passagem';
     return tipo;
   }
 
@@ -141,7 +141,7 @@ export default function GruposScreen({ navigation }: any) {
                   onPress={() => setGrupoDetalhes(item)}
                   style={styles.acaoBtn}
                 >
-                  <Text style={styles.acaoInfo}>💬</Text>
+                  <Image source={require('../../assets/balao-icon.png')} style={styles.acaoIcone} />
                 </TouchableOpacity>
                 {item.id_dono === session?.user.id && (
                   <>
@@ -149,13 +149,13 @@ export default function GruposScreen({ navigation }: any) {
                       onPress={() => navigation.navigate('EditarGrupo', { grupo: item })}
                       style={styles.acaoBtn}
                     >
-                      <Text style={styles.acaoEditar}>✏️</Text>
+                      <Image source={require('../../assets/lapis-icon.png')} style={styles.acaoIcone} />
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => handleExcluir(item)}
                       style={styles.acaoBtn}
                     >
-                      <Text style={styles.acaoExcluir}>🗑️</Text>
+                      <Image source={require('../../assets/lixo-icon.png')} style={styles.acaoIcone} />
                     </TouchableOpacity>
                   </>
                 )}
@@ -187,29 +187,39 @@ export default function GruposScreen({ navigation }: any) {
             <View style={styles.modalSeparador} />
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>📋 Plano</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Plano</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarPlano(grupoDetalhes?.tipo_plano)}</Text>
             </View>
 
             {grupoDetalhes?.tipo_plano !== 'personalizado' && (
               <View style={styles.modalLinha}>
-                <Text style={styles.modalChave}>📖 Capítulos/dia</Text>
+                <View style={styles.modalChaveContainer}>
+                  <Text style={styles.modalChave}>Capítulos/dia</Text>
+                </View>
                 <Text style={styles.modalValor}>{grupoDetalhes?.capitulos_por_dia}</Text>
               </View>
             )}
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>📅 Início</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Início</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarData(grupoDetalhes?.data_inicio)}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>🏁 Término</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Término</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarData(grupoDetalhes?.data_fim)}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>⏱️ Dias restantes</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Dias restantes</Text>
+              </View>
               <Text style={styles.modalValor}>
                 {diasRestantes(grupoDetalhes?.data_fim) === 0
                   ? 'Encerrado'
@@ -218,12 +228,16 @@ export default function GruposScreen({ navigation }: any) {
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>🔑 Código</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Código</Text>
+              </View>
               <Text style={styles.modalValor}>{grupoDetalhes?.codigo}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>✅ Check-in</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Check-in</Text>
+              </View>
               <Text style={styles.modalValor}>
                 {grupoDetalhes?.tipo_checkin === 'por_capitulo' ? '1 por capítulo lido' : '1 por dia'}
               </Text>
@@ -247,7 +261,8 @@ const styles = StyleSheet.create({
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 48, marginBottom: 24 },
   title: { fontSize: 24, fontWeight: 'bold', color: '#1B4F8A' },
-  voltar: { color: '#1B4F8A', fontSize: 16, width: 60 },
+  tituloContainer: { flexDirection: 'row', alignItems: 'center' },
+  tituloIcone: { width: 36, height: 22, marginRight: 8, tintColor: '#1B4F8A' },
   headerBotoes: { flexDirection: 'row', gap: 12 },
   entrar: { color: '#666', fontSize: 16 },
   novo: { color: '#1B4F8A', fontSize: 16, fontWeight: 'bold' },
@@ -261,19 +276,17 @@ const styles = StyleSheet.create({
   cardDescricao: { fontSize: 14, color: '#666' },
   cardAcoes: { flexDirection: 'row', gap: 8 },
   acaoBtn: { padding: 4 },
-  acaoInfo: { fontSize: 18 },
-  acaoEditar: { fontSize: 18 },
-  acaoExcluir: { fontSize: 18 },
+  acaoIcone: { width: 35, height: 20, resizeMode: 'contain' },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', padding: 24 },
   modalBox: { backgroundColor: '#fff', borderRadius: 16, padding: 24, width: '100%' },
   modalTitulo: { fontSize: 20, fontWeight: 'bold', color: '#1B4F8A', marginBottom: 4 },
   modalDescricao: { fontSize: 14, color: '#666', marginBottom: 12 },
   modalSeparador: { height: 1, backgroundColor: '#EEF4FB', marginBottom: 12 },
-  modalLinha: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 },
-  modalChave: { fontSize: 14, color: '#666', flex: 1 },
+  modalLinha: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
+  modalChaveContainer: { flexDirection: 'row', alignItems: 'center', gap: 6, flex: 1 },
+  modalIcone: { width: 18, height: 18, resizeMode: 'contain' },
+  modalChave: { fontSize: 14, color: '#666' },
   modalValor: { fontSize: 14, fontWeight: '600', color: '#333', flex: 2, textAlign: 'right' },
   modalFecharBtn: { backgroundColor: '#1B4F8A', padding: 12, borderRadius: 8, alignItems: 'center', marginTop: 16 },
   modalFecharTexto: { color: '#fff', fontSize: 15, fontWeight: 'bold' },
-  tituloContainer: { flexDirection: 'row', alignItems: 'center' },
-  tituloIcone: { width: 36, height: 22, marginRight: 8, tintColor: '#1B4F8A' },
 });

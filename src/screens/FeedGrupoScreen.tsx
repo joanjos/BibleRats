@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, Modal, Image } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { supabase } from '../services/supabase';
@@ -74,9 +74,9 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
   }
 
   function formatarPlano(tipo: string) {
-    if (tipo === 'sequencial') return '📖 Sequencial (Gênesis ao Apocalipse)';
-    if (tipo === 'anual') return '📅 Plano anual (Bíblia em 1 ano)';
-    if (tipo === 'personalizado') return '✏️ O grupo escolhe a passagem';
+    if (tipo === 'sequencial') return 'Sequencial (Gênesis ao Apocalipse)';
+    if (tipo === 'anual') return 'Plano anual (Bíblia em 1 ano)';
+    if (tipo === 'personalizado') return 'O grupo escolhe a passagem';
     return tipo;
   }
 
@@ -100,6 +100,8 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
 
   return (
     <View style={styles.container}>
+
+      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.voltar}>← Voltar</Text>
@@ -110,23 +112,25 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
         </View>
         <View style={styles.headerAcoes}>
           <TouchableOpacity onPress={() => setModalDetalhes(true)}>
-            <Text style={styles.infoBtn}>💬</Text>
+            <Image source={require('../../assets/balao-icon.png')} style={styles.headerIcone} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Ranking', { grupo })}>
-            <Text style={styles.rankingBtn}>🏆</Text>
+            <Image source={require('../../assets/trofeu-icon.png')} style={styles.headerIcone} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('CheckIn', { grupo })}>
-            <Text style={styles.checkinBtn}>✅</Text>
+            <Image source={require('../../assets/ok-icon.png')} style={styles.headerIcone} />
           </TouchableOpacity>
         </View>
       </View>
 
+      {/* Botão sair do grupo */}
       {!isDono && (
         <TouchableOpacity style={styles.sairBtn} onPress={handleSairGrupo}>
           <Text style={styles.sairTexto}>Sair do grupo</Text>
         </TouchableOpacity>
       )}
 
+      {/* Feed */}
       {checkins.length === 0 ? (
         <View style={styles.vazio}>
           <Text style={styles.vazioTexto}>Nenhum check-in ainda.</Text>
@@ -152,7 +156,7 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
                 </View>
               </View>
               <View style={styles.passagemContainer}>
-                <Text style={styles.passagem}>📖 {item.passagem_biblica}</Text>
+                <Text style={styles.passagem}>{item.passagem_biblica}</Text>
               </View>
               <Text style={styles.comentario}>{item.comentario}</Text>
             </View>
@@ -182,45 +186,58 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
             <View style={styles.modalSeparador} />
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>📋 Plano</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Plano</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarPlano(grupo.tipo_plano)}</Text>
             </View>
 
             {grupo.tipo_plano !== 'personalizado' && (
               <View style={styles.modalLinha}>
-                <Text style={styles.modalChave}>📖 Capítulos/dia</Text>
+                <View style={styles.modalChaveContainer}>
+                  <Text style={styles.modalChave}>Capítulos/dia</Text>
+                </View>
                 <Text style={styles.modalValor}>{grupo.capitulos_por_dia}</Text>
               </View>
             )}
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>📅 Início</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Início</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarDataSimples(grupo.data_inicio)}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>🏁 Término</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Término</Text>
+              </View>
               <Text style={styles.modalValor}>{formatarDataSimples(grupo.data_fim)}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>⏱️ Dias restantes</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Dias restantes</Text>
+              </View>
               <Text style={styles.modalValor}>
                 {diasRestantes() === 0 ? 'Encerrado' : `${diasRestantes()} dias`}
               </Text>
             </View>
 
-            
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>✅ Check-in</Text>
-              <Text style={styles.modalValor}>
-                {grupo?.tipo_checkin === 'por_capitulo' ? '1 por capítulo lido' : '1 por dia'}
-              </Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Código</Text>
+              </View>
+              <Text style={styles.modalValor}>{grupo.codigo}</Text>
             </View>
 
             <View style={styles.modalLinha}>
-              <Text style={styles.modalChave}>🔑 Código</Text>
-              <Text style={styles.modalValor}>{grupo.codigo}</Text>
+              <View style={styles.modalChaveContainer}>
+                <Text style={styles.modalChave}>Check-in</Text>
+              </View>
+              <Text style={styles.modalValor}>
+                {grupo?.tipo_checkin === 'por_capitulo' ? '1 por capítulo lido' : '1 por dia'}
+              </Text>
             </View>
 
             <TouchableOpacity
@@ -232,6 +249,7 @@ export default function FeedGrupoScreen({ route, navigation }: any) {
           </View>
         </TouchableOpacity>
       </Modal>
+
     </View>
   );
 }
@@ -245,9 +263,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: '#1B4F8A' },
   codigo: { fontSize: 12, color: '#999', marginTop: 2 },
   headerAcoes: { flexDirection: 'row', gap: 8, justifyContent: 'flex-end' },
-  infoBtn: { fontSize: 22 },
-  rankingBtn: { fontSize: 22 },
-  checkinBtn: { fontSize: 22 },
+  headerIcone: { width: 35, height: 20, resizeMode: 'contain' },
   sairBtn: { alignSelf: 'flex-end', marginBottom: 12 },
   sairTexto: { color: '#999', fontSize: 13, textDecorationLine: 'underline' },
   vazio: { flex: 1, justifyContent: 'center', alignItems: 'center' },
@@ -267,8 +283,10 @@ const styles = StyleSheet.create({
   modalTitulo: { fontSize: 20, fontWeight: 'bold', color: '#1B4F8A', marginBottom: 4 },
   modalDescricao: { fontSize: 14, color: '#666', marginBottom: 12 },
   modalSeparador: { height: 1, backgroundColor: '#EEF4FB', marginBottom: 12 },
-  modalLinha: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 },
-  modalChave: { fontSize: 14, color: '#666', flex: 1 },
+  modalLinha: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
+  modalChaveContainer: { flexDirection: 'row', alignItems: 'center', gap: 6, flex: 1 },
+  modalIcone: { width: 18, height: 18, resizeMode: 'contain' },
+  modalChave: { fontSize: 14, color: '#666' },
   modalValor: { fontSize: 14, fontWeight: '600', color: '#333', flex: 2, textAlign: 'right' },
   modalFecharBtn: { backgroundColor: '#1B4F8A', padding: 12, borderRadius: 8, alignItems: 'center', marginTop: 16 },
   modalFecharTexto: { color: '#fff', fontSize: 15, fontWeight: 'bold' },

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { supabase } from '../services/supabase';
@@ -71,10 +71,10 @@ export default function RankingScreen({ route, navigation }: any) {
   }
 
   function medalha(index: number) {
-    if (index === 0) return '🥇';
-    if (index === 1) return '🥈';
-    if (index === 2) return '🥉';
-    return `${index + 1}º`;
+    if (index === 0) return <Image source={require('../../assets/medalha1-icon.png')} style={styles.medalhaIcone} />;
+    if (index === 1) return <Image source={require('../../assets/medalha2-icon.png')} style={styles.medalhaIcone} />;
+    if (index === 2) return <Image source={require('../../assets/medalha3-icon.png')} style={styles.medalhaIcone} />;
+    return <Text style={styles.medalha}>{index + 1}º</Text>;
   }
 
   if (loading) {
@@ -90,21 +90,29 @@ export default function RankingScreen({ route, navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.voltar}>← Voltar</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>🏆 Ranking</Text>
-        <View style={{ width: 60 }} />
+    <View style={styles.header}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={styles.voltar}>← Voltar</Text>
+      </TouchableOpacity>
+      <View style={styles.tituloContainer}>
+        <Text style={styles.title}>Ranking</Text>
       </View>
+      <View style={{ width: 60 }} />
+    </View>
 
       <Text style={styles.grupoNome}>{grupo.nome}</Text>
 
       <View style={[styles.statusCard, competicaoEncerrada ? styles.statusEncerrado : styles.statusAtivo]}>
         {competicaoEncerrada ? (
-          <Text style={styles.statusTexto}>🏁 Competição encerrada!</Text>
+          <View style={styles.statusContainer}>
+            <Image source={require('../../assets/flag-icon.png')} style={styles.statusIcone} />
+            <Text style={styles.statusTexto}>Competição encerrada!</Text>
+          </View>
         ) : (
-          <Text style={styles.statusTexto}>⏱️ {dias} dias restantes — até {formatarDataFim()}</Text>
+          <View style={styles.statusContainer}>
+            <Image source={require('../../assets/relogio-icon.png')} style={styles.statusIcone} />
+            <Text style={styles.statusTexto}>{dias} dias restantes — até {formatarDataFim()}</Text>
+          </View>
         )}
       </View>
 
@@ -123,14 +131,14 @@ export default function RankingScreen({ route, navigation }: any) {
               item.id === session?.user.id && styles.cardDestaque,
               index === 0 && styles.cardPrimeiro,
             ]}>
-              <Text style={styles.medalha}>{medalha(index)}</Text>
+              <View style={styles.medalhaContainer}>{medalha(index)}</View>
               <View style={styles.cardInfo}>
                 <Text style={styles.cardNome}>
                   {item.nome} {item.id === session?.user.id ? '(você)' : ''}
                 </Text>
                 <Text style={styles.cardTotal}>{item.total} check-in{item.total !== 1 ? 's' : ''}</Text>
               </View>
-              {index === 0 && <Text style={styles.lider}>Líder 👑</Text>}
+              {index === 0 && <Text style={styles.lider}>Líder</Text>}
             </View>
           )}
         />
@@ -145,6 +153,8 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 48, marginBottom: 8 },
   voltar: { color: '#1B4F8A', fontSize: 16, width: 60 },
   title: { fontSize: 20, fontWeight: 'bold', color: '#1B4F8A' },
+  tituloContainer: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  tituloIcone: { width: 26, height: 26, resizeMode: 'contain' },
   grupoNome: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 16 },
   statusCard: { borderRadius: 10, padding: 12, alignItems: 'center', marginBottom: 20 },
   statusAtivo: { backgroundColor: '#EEF4FB' },
@@ -157,8 +167,12 @@ const styles = StyleSheet.create({
   cardPrimeiro: { backgroundColor: '#FFF8E1', borderWidth: 2, borderColor: '#FFD700' },
   cardDestaque: { borderWidth: 2, borderColor: '#1B4F8A' },
   medalha: { fontSize: 24, marginRight: 12, minWidth: 36, textAlign: 'center' },
+  medalhaIcone: { width: 60, height: 40, resizeMode: 'contain' },
+  medalhaContainer: { width: 40, marginRight: 12, alignItems: 'center', justifyContent: 'center' },
   cardInfo: { flex: 1 },
   cardNome: { fontSize: 16, fontWeight: 'bold', color: '#333' },
   cardTotal: { fontSize: 13, color: '#666', marginTop: 2 },
   lider: { fontSize: 12, fontWeight: 'bold', color: '#B8860B' },
+  statusContainer: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  statusIcone: { width: 40, height: 16, resizeMode: 'contain' },
 });

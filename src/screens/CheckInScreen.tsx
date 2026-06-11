@@ -107,7 +107,7 @@ export default function CheckInScreen({ route, navigation }: any) {
     const esperado = `${proximaPassagemValida.livro.nome} ${proximaPassagemValida.capitulo}`;
     const selecionado = `${livroSelecionado?.nome} ${capituloSelecionado}`;
     if (selecionado !== esperado) {
-      alert(`Sequência inválida! O próximo capítulo deve ser ${passagemHoje}. 📖`);
+      alert(`Sequência inválida! O próximo capítulo deve ser ${passagemHoje}.`);
       return false;
     }
     return true;
@@ -128,7 +128,7 @@ export default function CheckInScreen({ route, navigation }: any) {
         .lte('data_criacao', `${hoje}T23:59:59`);
 
       if (data && data.length > 0) {
-        alert('Você já fez seu check-in hoje neste grupo! Volte amanhã. 😊');
+        alert('Você já fez seu check-in hoje neste grupo! Volte amanhã.');
         return false;
       }
     }
@@ -148,7 +148,7 @@ export default function CheckInScreen({ route, navigation }: any) {
         .lte('data_criacao', `${hoje}T23:59:59`);
 
       if (data && data.length > 0) {
-        alert('Você já fez check-in para essa passagem hoje! Selecione outro capítulo. 😊');
+        alert('Você já fez check-in para essa passagem hoje! Selecione outro capítulo.');
         return false;
       }
     }
@@ -195,9 +195,9 @@ export default function CheckInScreen({ route, navigation }: any) {
       const novoStreak = await atualizarStreak(session?.user.id!);
       setLoading(false);
       if (novoStreak && novoStreak > 1) {
-        alert(`Check-in realizado! 🎉\n🔥 ${novoStreak} dias seguidos! Continue assim!`);
+        alert(`Check-in realizado! \n ${novoStreak} dias seguidos! Continue assim!`);
       } else {
-        alert('Check-in realizado! 🎉 Parabéns por ler a Bíblia hoje!');
+        alert('Check-in realizado! Parabéns por ler a Bíblia hoje!');
       }
       navigation.goBack();
     }
@@ -220,7 +220,7 @@ export default function CheckInScreen({ route, navigation }: any) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.voltar}>← Voltar</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Check-in do Dia ✅</Text>
+        <Text style={styles.title}>Check-in do Dia</Text>
         <View style={{ width: 70 }} />
       </View>
 
@@ -228,8 +228,8 @@ export default function CheckInScreen({ route, navigation }: any) {
         <View style={styles.regraCard}>
           <Text style={styles.regraTexto}>
             {grupo.tipo_checkin === 'diario'
-              ? '📅 Este grupo permite 1 check-in por dia'
-              : '📖 Este grupo permite 1 check-in por capítulo lido'}
+              ? 'Este grupo permite um check-in por dia'
+              : 'Este grupo permite um check-in por capítulo lido'}
           </Text>
         </View>
       )}
@@ -239,7 +239,7 @@ export default function CheckInScreen({ route, navigation }: any) {
         <>
           <Text style={styles.label}>Próxima passagem da sequência:</Text>
           <View style={styles.card}>
-            <Text style={styles.passagem}>📖 {passagemHoje || 'Carregando...'}</Text>
+            <Text style={styles.passagem}>{passagemHoje || 'Carregando...'}</Text>
             <Text style={styles.texto}>Esta é a próxima passagem na sequência do seu grupo.</Text>
           </View>
         </>
@@ -248,7 +248,7 @@ export default function CheckInScreen({ route, navigation }: any) {
       {/* Plano anual — mostra passagem calculada */}
       {!isSequencial && !isPersonalizado && (
         <View style={styles.card}>
-          <Text style={styles.passagem}>📖 {passagemHoje}</Text>
+          <Text style={styles.passagem}>{passagemHoje}</Text>
           <Text style={styles.texto}>Leia o capítulo indicado e compartilhe sua reflexão.</Text>
         </View>
       )}
@@ -282,7 +282,7 @@ export default function CheckInScreen({ route, navigation }: any) {
           {livroSelecionado && (
             <View style={styles.passagemSelecionada}>
               <Text style={styles.passagemSelecionadaTexto}>
-                📖 {getPassagemSelecionada()}
+                {getPassagemSelecionada()}
               </Text>
             </View>
           )}
@@ -306,7 +306,7 @@ export default function CheckInScreen({ route, navigation }: any) {
         <ActivityIndicator size="large" color="#1B4F8A" />
       ) : (
         <TouchableOpacity style={styles.button} onPress={handleCheckIn}>
-          <Text style={styles.buttonText}>✅ Confirmar Check-in</Text>
+          <Text style={styles.buttonText}>Confirmar Check-in</Text>
         </TouchableOpacity>
       )}
 

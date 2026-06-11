@@ -66,18 +66,18 @@ function TabNavigator() {
         },
       }}
     >
-<Tab.Screen
-  name="Início"
-  component={HomeScreen}
-  options={{
-    tabBarIcon: ({ focused }) => (
-      <Image
-        source={require('../../assets/home.png')}
-        style={{ width: 24, height: 24, tintColor: focused ? '#1B4F8A' : '#999' }}
-      />
-    ),
-  }}
-/>
+    <Tab.Screen
+      name="Início"
+      component={HomeScreen}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <Image
+            source={require('../../assets/home.png')}
+            style={{ width: 24, height: 24, tintColor: focused ? '#1B4F8A' : '#999' }}
+          />
+        ),
+      }}
+    />
     <Tab.Screen
       name="Bíblia"
       component={BibliaStack}
