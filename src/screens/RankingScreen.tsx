@@ -111,7 +111,7 @@ export default function RankingScreen({ route, navigation }: any) {
       {ranking.length === 0 ? (
         <View style={styles.vazio}>
           <Text style={styles.vazioTexto}>Nenhum check-in ainda.</Text>
-          <Text style={styles.vazioSubtexto}>Seja o primeiro a aparecer no ranking! 🔥</Text>
+          <Text style={styles.vazioSubtexto}>Seja o primeiro a aparecer no ranking!</Text>
         </View>
       ) : (
         <FlatList

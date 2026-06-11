@@ -32,9 +32,9 @@ export default function BibliaScreen({ navigation }: any) {
 
       <FlatList
         data={[
-          { tipo: 'secao', texto: '📜 Antigo Testamento' },
+          { tipo: 'secao', texto: 'Antigo Testamento' },
           ...LIVROS.slice(0, 39).filter(l => l.nome.toLowerCase().includes(busca.toLowerCase())).map(l => ({ tipo: 'livro', ...l })),
-          { tipo: 'secao', texto: '✝️ Novo Testamento' },
+          { tipo: 'secao', texto: 'Novo Testamento' },
           ...LIVROS.slice(39).filter(l => l.nome.toLowerCase().includes(busca.toLowerCase())).map(l => ({ tipo: 'livro', ...l })),
         ]}
         keyExtractor={(item, index) => index.toString()}

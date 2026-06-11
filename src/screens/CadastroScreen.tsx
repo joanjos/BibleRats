@@ -92,7 +92,7 @@ export default function CadastroScreen({ navigation }: any) {
     }
 
     setLoading(false);
-    alert('Cadastro realizado com sucesso! 🎉 Faça login para continuar.');
+    alert('Cadastro realizado com sucesso! Faça login para continuar.');
     navigation.goBack();
   }
 

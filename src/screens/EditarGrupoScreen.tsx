@@ -77,7 +77,7 @@ export default function EditarGrupoScreen({ route, navigation }: any) {
     if (error) {
       alert('Erro ao salvar: ' + error.message);
     } else {
-      alert('Grupo atualizado com sucesso! ✅');
+      alert('Grupo atualizado com sucesso!');
       navigation.goBack();
     }
   }

@@ -12,7 +12,7 @@ export async function atualizarStreak(userId: string) {
   const hoje = new Date().toISOString().split('T')[0];
   const ontem = new Date(Date.now() - 86400000).toISOString().split('T')[0];
 
-  // Se já fez check-in hoje, não faz nada
+  // Se fez check-in hoje, não faz nada
   if (perfil.ultimo_checkin === hoje) return;
 
   let novoStreak = 1;

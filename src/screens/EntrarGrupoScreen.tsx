@@ -51,7 +51,7 @@ export default function EntrarGrupoScreen({ navigation }: any) {
     if (erroEntrar) {
       alert('Erro ao entrar no grupo: ' + erroEntrar.message);
     } else {
-      alert(`Você entrou no grupo ${grupo.nome}! 🎉`);
+      alert(`Você entrou no grupo ${grupo.nome}!`);
       navigation.goBack();
     }
   }

@@ -37,8 +37,8 @@ export default function HomeScreen() {
 
   async function carregarVersiculo() {
     setLoadingVersiculo(true);
-    const v = await getVersiculoDoDia();
-    setVersiculo(v);
+    const versiculo2 = await getVersiculoDoDia();
+    setVersiculo(versiculo2);
     setLoadingVersiculo(false);
   }
 
@@ -71,7 +71,7 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.versiculoCard}>
-        <Text style={styles.versiculoLabel}>✨ Versículo do Dia</Text>
+        <Text style={styles.versiculoLabel}>Versículo do Dia</Text>
         {loadingVersiculo ? (
           <ActivityIndicator color="#fff" style={{ marginTop: 16 }} />
         ) : (
@@ -83,7 +83,7 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.infoCard}>
-        <Text style={styles.infoTexto}>📖 Acesse seus grupos para ver a passagem do dia e fazer seu check-in!</Text>
+        <Text style={styles.infoTexto}>Acesse seus grupos para ver a passagem do dia e fazer seu check-in!</Text>
       </View>
     </ScrollView>
   );

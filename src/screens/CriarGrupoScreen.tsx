@@ -77,7 +77,7 @@ export default function CriarGrupoScreen({ navigation }: any) {
     });
 
     setLoading(false);
-    alert('Grupo criado com sucesso! 🎉');
+    alert('Grupo criado com sucesso!');
     navigation.goBack();
   }
 
@@ -92,7 +92,7 @@ export default function CriarGrupoScreen({ navigation }: any) {
       <Text style={styles.label}>Nome do grupo</Text>
       <TextInput
         style={styles.input}
-        placeholder="Ex: Família Silva, Célula Jovens..."
+        placeholder="Ex: Família Anjos, Célula Jovens..."
         value={nome}
         onChangeText={setNome}
       />

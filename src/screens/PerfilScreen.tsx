@@ -101,7 +101,7 @@ export default function PerfilScreen({ navigation }: any) {
     if (error) {
       alert('Erro ao salvar: ' + error.message);
     } else {
-      alert('Perfil atualizado! ✅');
+      alert('Perfil atualizado!');
     }
   }
 
@@ -170,7 +170,7 @@ export default function PerfilScreen({ navigation }: any) {
       <Text style={styles.label}>Igreja / Comunidade</Text>
       <TextInput
         style={styles.input}
-        placeholder="Ex: Igreja Batista Central"
+        placeholder="Ex: Igreja Cristã Casa Favorita"
         value={igreja}
         onChangeText={setIgreja}
       />
